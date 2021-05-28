@@ -10,8 +10,6 @@
 
 #include "nimconfig.h"
 
-#if defined(CONFIG_BT_ENABLED)
-
 #if defined(CONFIG_NIMBLE_CPP_IDF) // using esp-idf
 #  include "esp_log.h"
 #  ifndef CONFIG_NIMBLE_CPP_LOG_LEVEL
@@ -76,5 +74,4 @@
 #  endif
 
 #endif /* CONFIG_NIMBLE_CPP_IDF */
-#endif /* CONFIG_BT_ENABLED */
-#endif /* MAIN_NIMBLELOG_H_ */
+#endif /*  MAIN_NIMBLELOG_H_ */
