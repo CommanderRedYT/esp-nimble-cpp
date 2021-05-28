@@ -14,11 +14,13 @@ elseif("nimble" IN_LIST BUILD_COMPONENTS OR "__nimble" IN_LIST __hack_component_
     )
 endif()
 
-if("arduino" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "__idf_arduino")
-    list(APPEND ESP_NIMBLE_PRIV_REQUIRES
-        arduino
-    )
-elseif("framework-arduinoespressif32" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "___idf_framework-arduinoespressif32")
+# Dont use arduino bullshit
+#if("arduino" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "__idf_arduino")
+#    list(APPEND ESP_NIMBLE_PRIV_REQUIRES
+#        arduino
+#    )
+#elseif()
+if("framework-arduinoespressif32" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "___idf_framework-arduinoespressif32")
     list(APPEND ESP_NIMBLE_PRIV_REQUIRES
         framework-arduinoespressif32
     )
@@ -63,3 +65,7 @@ idf_component_register(
     ${ESP_NIMBLE_PRIV_REQUIRES}
 )
 
+target_compile_options(${COMPONENT_TARGET}
+    PUBLIC
+        -DDONT_USE_ARDUINO_BULLSHIT
+)

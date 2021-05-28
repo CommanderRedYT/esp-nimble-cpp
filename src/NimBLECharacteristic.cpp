@@ -266,7 +266,7 @@ int NimBLECharacteristic::handleGapEvent(uint16_t conn_handle, uint16_t attr_han
         NIMBLE_LOGW(LOG_TAG, "Conn_handle (%d) is above the maximum value (%d)", conn_handle, BLE_HCI_LE_CONN_HANDLE_MAX);
         return BLE_ATT_ERR_INVALID_HANDLE;
     }
-    
+
     const ble_uuid_t *uuid;
     int rc;
     NimBLEConnInfo peerInfo;
@@ -556,7 +556,7 @@ NimBLECharacteristicCallbacks* NimBLECharacteristic::getCallbacks() {
  * @param [in] length The number of bytes in the data buffer.
  */
 void NimBLECharacteristic::setValue(const uint8_t* data, size_t length) {
-#if CONFIG_NIMBLE_CPP_LOG_LEVEL >= 4
+#if CONFIG_LOG_DEFAULT_LEVEL >= 4 || (ARDUINO_ARCH_ESP32 && !defined(DONT_USE_ARDUINO_BULLSHIT) && CORE_DEBUG_LEVEL >= 4)
     char* pHex = NimBLEUtils::buildHexData(nullptr, data, length);
     NIMBLE_LOGD(LOG_TAG, ">> setValue: length=%d, data=%s, characteristic UUID=%s",
                 length, pHex, getUUID().toString().c_str());
