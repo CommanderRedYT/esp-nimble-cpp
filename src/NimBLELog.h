@@ -12,7 +12,7 @@
 
 #if defined(CONFIG_BT_ENABLED)
 
-#ifdef ARDUINO_ARCH_ESP32
+#if defined(ARDUINO_ARCH_ESP32) && !defined(DONT_USE_ARDUINO_BULLSHIT)
 #include "syscfg/syscfg.h"
 #include "modlog/modlog.h"
 

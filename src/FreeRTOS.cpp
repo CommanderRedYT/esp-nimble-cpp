@@ -155,7 +155,7 @@ void FreeRTOS::Semaphore::give() {
     } else {
         xSemaphoreGive(m_semaphore);
     }
-// #ifdef ARDUINO_ARCH_ESP32
+// #if defined(ARDUINO_ARCH_ESP32) && !defined(DONT_USE_ARDUINO_BULLSHIT)
 //  FreeRTOS::sleep(10);
 // #endif
 
