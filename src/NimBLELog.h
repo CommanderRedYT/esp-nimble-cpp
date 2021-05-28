@@ -10,8 +10,6 @@
 
 #include "sdkconfig.h"
 
-#if defined(CONFIG_BT_ENABLED)
-
 #if defined(ARDUINO_ARCH_ESP32) && !defined(DONT_USE_ARDUINO_BULLSHIT)
 #include "syscfg/syscfg.h"
 #include "modlog/modlog.h"
@@ -62,5 +60,4 @@
 
 #endif /*ARDUINO_ARCH_ESP32*/
 
-#endif /*CONFIG_BT_ENABLED*/
 #endif /*MAIN_NIMBLELOG_H_*/

@@ -783,6 +783,8 @@ NimBLEAddress NimBLEDevice::getWhiteListAddress(size_t index) {
 
         // Set the device name.
         rc = ble_svc_gap_device_name_set(deviceName.c_str());
+        if (rc != 0)
+            NIMBLE_LOGE(LOG_TAG, "ble_svc_gap_device_name_set() failed %i name_size=%zd", rc, deviceName.size());
         assert(rc == 0);
 
         ble_store_config_init();
