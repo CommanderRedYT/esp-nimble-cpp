@@ -15,6 +15,7 @@
 #ifndef MAIN_NIMBLEBEACON_H_
 #define MAIN_NIMBLEBEACON_H_
 
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_NIMBLE_ENABLED)
 #include "NimBLEUUID.h"
 /**
  * @brief Representation of a beacon.
@@ -48,4 +49,5 @@ public:
     void        setSignalPower(int8_t signalPower);
 }; // NimBLEBeacon
 
+#endif
 #endif /* MAIN_NIMBLEBEACON_H_ */

@@ -7,7 +7,7 @@
  */
 
 #include "nimconfig.h"
-#if defined(CONFIG_BT_ENABLED)
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_NIMBLE_ENABLED)
 
 #include "NimBLEUtils.h"
 #include "NimBLELog.h"

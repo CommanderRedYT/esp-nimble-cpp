@@ -16,7 +16,7 @@
 #define COMPONENTS_NIMBLEUUID_H_
 
 #include "nimconfig.h"
-#if defined(CONFIG_BT_ENABLED)
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_NIMBLE_ENABLED)
 
 #if defined(CONFIG_NIMBLE_CPP_IDF)
 #include "host/ble_uuid.h"
