@@ -9,7 +9,7 @@
 #ifndef COMPONENTS_NIMBLEUTILS_H_
 #define COMPONENTS_NIMBLEUTILS_H_
 #include "sdkconfig.h"
-#if defined(CONFIG_BT_ENABLED)
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_NIMBLE_ENABLED)
 
 #include "host/ble_gap.h"
 

@@ -14,6 +14,7 @@
 
 #ifndef _NIMBLEEddystoneURL_H_
 #define _NIMBLEEddystoneURL_H_
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_NIMBLE_ENABLED)
 #include "NimBLEUUID.h"
 
 #include <string>
@@ -49,4 +50,5 @@ private:
 
 }; // NIMBLEEddystoneURL
 
+#endif
 #endif /* _NIMBLEEddystoneURL_H_ */

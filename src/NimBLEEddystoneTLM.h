@@ -14,6 +14,8 @@
 
 #ifndef _NimBLEEddystoneTLM_H_
 #define _NimBLEEddystoneTLM_H_
+
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_NIMBLE_ENABLED)
 #include "NimBLEUUID.h"
 
 #include <string>
@@ -57,4 +59,5 @@ private:
 
 }; // NimBLEEddystoneTLM
 
+#endif
 #endif /* _NimBLEEddystoneTLM_H_ */

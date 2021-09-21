@@ -15,7 +15,7 @@
 #ifndef MAIN_NIMBLEDEVICE_H_
 #define MAIN_NIMBLEDEVICE_H_
 #include "sdkconfig.h"
-#if defined(CONFIG_BT_ENABLED)
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_NIMBLE_ENABLED)
 
 #include "nimconfig.h"
 

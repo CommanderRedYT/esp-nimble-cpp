@@ -15,7 +15,7 @@
 #ifndef COMPONENTS_NIMBLEUUID_H_
 #define COMPONENTS_NIMBLEUUID_H_
 #include "sdkconfig.h"
-#if defined(CONFIG_BT_ENABLED)
+#if defined(CONFIG_BT_ENABLED) && defined(CONFIG_NIMBLE_ENABLED)
 
 #include "host/ble_uuid.h"
 /****  FIX COMPILATION ****/
