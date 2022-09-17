@@ -61,6 +61,7 @@ idf_component_register(
     bt
     nvs_flash
     driver
+    esp_ringbuf
   PRIV_REQUIRES
     ${ESP_NIMBLE_PRIV_REQUIRES}
 )
