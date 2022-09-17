@@ -54,6 +54,7 @@ idf_component_register(
   REQUIRES
     bt
     nvs_flash
+    esp_ringbuf
   PRIV_REQUIRES
     ${ESP_NIMBLE_PRIV_REQUIRES}
 )
