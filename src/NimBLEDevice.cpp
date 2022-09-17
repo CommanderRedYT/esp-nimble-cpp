@@ -810,10 +810,12 @@ NimBLEAddress NimBLEDevice::getWhiteListAddress(size_t index) {
     if (ret == 0) {
         nimble_port_deinit();
 
+#if 0
         ret = esp_nimble_hci_and_controller_deinit();
         if (ret != ESP_OK) {
             NIMBLE_LOGE(LOG_TAG, "esp_nimble_hci_and_controller_deinit() failed with error: %d", ret);
         }
+#endif
 
         initialized = false;
         m_synced = false;
