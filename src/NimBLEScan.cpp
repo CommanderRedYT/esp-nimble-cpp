@@ -284,7 +284,7 @@ bool NimBLEScan::isScanning() {
  * @return True if scan started or false if there was an error.
  */
 bool NimBLEScan::start(uint32_t duration, void (*scanCompleteCB)(NimBLEScanResults), bool is_continue) {
-    NIMBLE_LOGD(LOG_TAG, ">> start(duration=%d)", duration);
+    NIMBLE_LOGD(LOG_TAG, ">> start(duration=%lu)", duration);
 
     // Save the callback to be invoked when the scan completes.
     m_scanCompleteCB = scanCompleteCB;
