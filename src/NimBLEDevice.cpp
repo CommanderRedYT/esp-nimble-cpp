@@ -48,11 +48,14 @@
 #  include "nimble/nimble/host/services/gatt/include/services/gatt/ble_svc_gatt.h"
 #endif
 
-#if defined(ESP_PLATFORM) && defined(CONFIG_ENABLE_ARDUINO_DEPENDS)
+/*#if defined(ESP_PLATFORM) && defined(CONFIG_ENABLE_ARDUINO_DEPENDS)
 #  include "esp32-hal-bt.h"
-#endif
+#endif*/
 
 #include "NimBLELog.h"
+
+#undef CONFIG_ENABLE_ARDUINO_DEPENDS
+
 
 static const char* LOG_TAG = "NimBLEDevice";
 

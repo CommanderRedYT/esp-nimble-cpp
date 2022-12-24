@@ -14,11 +14,11 @@ elseif("nimble" IN_LIST BUILD_COMPONENTS OR "__nimble" IN_LIST __hack_component_
     )
 endif()
 
-if("arduino" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "__idf_arduino")
-    list(APPEND ESP_NIMBLE_PRIV_REQUIRES
-        arduino
-    )
-endif()
+#if("arduino" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "__idf_arduino")
+#    list(APPEND ESP_NIMBLE_PRIV_REQUIRES
+#        arduino
+#    )
+#endif()
 
 idf_component_register(
   REQUIRED_IDF_TARGETS
