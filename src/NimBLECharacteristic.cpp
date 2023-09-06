@@ -18,6 +18,8 @@
 #include "NimBLEDevice.h"
 #include "NimBLELog.h"
 
+#include <ctime>
+
 #define NULL_HANDLE (0xffff)
 #define NIMBLE_SUB_NOTIFY   0x0001
 #define NIMBLE_SUB_INDICATE 0x0002

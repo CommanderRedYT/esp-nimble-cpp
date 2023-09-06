@@ -21,6 +21,8 @@
 
 #include <climits>
 
+#include <ctime>
+
 static const char* LOG_TAG = "NimBLERemoteCharacteristic";
 
 /**
