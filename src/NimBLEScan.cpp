@@ -22,6 +22,7 @@
 #include "NimBLELog.h"
 
 #include <string>
+#include <ctime>
 
 static const char* LOG_TAG = "NimBLEScan";
 

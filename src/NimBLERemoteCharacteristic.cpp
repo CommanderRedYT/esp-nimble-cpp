@@ -22,6 +22,8 @@
 #include "NimBLEUtils.h"
 #include "NimBLELog.h"
 
+#include <ctime>
+
 static const char* LOG_TAG = "NimBLERemoteCharacteristic";
 
 /**

@@ -23,6 +23,7 @@
 
 #include <string>
 #include <unordered_set>
+#include <ctime>
 
 #include "nimble/nimble_port.h"
 
