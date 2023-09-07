@@ -18,6 +18,7 @@
     defined(CONFIG_BT_NIMBLE_ROLE_BROADCASTER) && \
     !CONFIG_BT_NIMBLE_EXT_ADV) || defined(_DOXYGEN_)
 
+#include "esp_nimble_cfg.h"
 #if defined(CONFIG_NIMBLE_CPP_IDF)
 #include "services/gap/ble_svc_gap.h"
 #else
