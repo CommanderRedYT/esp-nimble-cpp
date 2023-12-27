@@ -867,10 +867,12 @@ void NimBLEDevice::init(const std::string &deviceName) {
 
         errRc = nvs_flash_init();
 
+        /*
         if (errRc == ESP_ERR_NVS_NO_FREE_PAGES || errRc == ESP_ERR_NVS_NEW_VERSION_FOUND) {
             ESP_ERROR_CHECK(nvs_flash_erase());
             errRc = nvs_flash_init();
         }
+        */
 
         ESP_ERROR_CHECK(errRc);
 
@@ -894,7 +896,11 @@ void NimBLEDevice::init(const std::string &deviceName) {
         ESP_ERROR_CHECK(esp_nimble_hci_init());
 #  endif
 #endif
+        ESP_LOGI(LOG_TAG, "calling nimble_port_init()");
+
         nimble_port_init();
+
+        ESP_LOGI(LOG_TAG, "nimble_port_init() done");
 
         // Setup callbacks for host events
         ble_hs_cfg.reset_cb = NimBLEDevice::onReset;
@@ -911,20 +917,26 @@ void NimBLEDevice::init(const std::string &deviceName) {
         ble_hs_cfg.store_status_cb = ble_store_util_status_rr; /*TODO: Implement handler for this*/
 
         // Set the device name.
+        ESP_LOGI(LOG_TAG, "Setting device name to: %s", deviceName.c_str());
         rc = ble_svc_gap_device_name_set(deviceName.c_str());
         assert(rc == 0);
 
+        ESP_LOGI(LOG_TAG, "Calling ble_store_config_init()");
         ble_store_config_init();
 
+        ESP_LOGI(LOG_TAG, "Calling nimble_port_freertos_init()");
         nimble_port_freertos_init(NimBLEDevice::host_task);
+        ESP_LOGI(LOG_TAG, "nimble_port_freertos_init() done");
     }
 
     // Wait for host and controller to sync before returning and accepting new tasks
+    ESP_LOGI(LOG_TAG, "Waiting for host and controller to sync m_synced=%s", m_synced ? "true" : "false");
     while(!m_synced){
         taskYIELD();
     }
 
     initialized = true; // Set the initialization flag to ensure we are only initialized once.
+    ESP_LOGI(LOG_TAG, "BLE initialized!!!");
 } // init
 
 
