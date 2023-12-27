@@ -14,17 +14,23 @@ elseif("nimble" IN_LIST BUILD_COMPONENTS OR "__nimble" IN_LIST __hack_component_
     )
 endif()
 
-#if("arduino" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "__idf_arduino")
-#    list(APPEND ESP_NIMBLE_PRIV_REQUIRES
-#        arduino
-#    )
-#endif()
+# if("arduino" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "__idf_arduino")
+#     list(APPEND ESP_NIMBLE_PRIV_REQUIRES
+#         arduino
+#     )
+# elseif("framework-arduinoespressif32" IN_LIST BUILD_COMPONENTS OR __hack_component_targets MATCHES "___idf_framework-arduinoespressif32")
+#     list(APPEND ESP_NIMBLE_PRIV_REQUIRES
+#         framework-arduinoespressif32
+#     )
+# endif()
 
 idf_component_register(
   REQUIRED_IDF_TARGETS
     "esp32"
     "esp32s3"
+    "esp32c2"
     "esp32c3"
+    "esp32c6"
   INCLUDE_DIRS
     "src"
   SRCS
@@ -52,6 +58,7 @@ idf_component_register(
   REQUIRES
     bt
     nvs_flash
+    driver
   PRIV_REQUIRES
     ${ESP_NIMBLE_PRIV_REQUIRES}
 )

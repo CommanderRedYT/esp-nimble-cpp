@@ -157,6 +157,18 @@ void NimBLEAdvertising::setManufacturerData(const std::string &data) {
 
 
 /**
+ * @brief Set the advertised manufacturer data.
+ * @param [in] data The data to advertise.
+ */
+void NimBLEAdvertising::setManufacturerData(const std::vector<uint8_t> &data) {
+    m_mfgData = data;
+    m_advData.mfg_data = &m_mfgData[0];
+    m_advData.mfg_data_len = m_mfgData.size();
+    m_advDataSet = false;
+} // setManufacturerData
+
+
+/**
  * @brief Set the advertised URI.
  * @param [in] uri The URI to advertise.
  */
@@ -387,9 +399,10 @@ void NimBLEAdvertising::setScanResponseData(NimBLEAdvertisementData& advertiseme
  * @brief Start advertising.
  * @param [in] duration The duration, in milliseconds, to advertise, 0 == advertise forever.
  * @param [in] advCompleteCB A pointer to a callback to be invoked when advertising ends.
+ * @param [in] dirAddr The address of a peer to directly advertise to.
  * @return True if advertising started successfully.
  */
-bool NimBLEAdvertising::start(uint32_t duration, void (*advCompleteCB)(NimBLEAdvertising *pAdv)) {
+bool NimBLEAdvertising::start(uint32_t duration, void (*advCompleteCB)(NimBLEAdvertising *pAdv), NimBLEAddress* dirAddr) {
     NIMBLE_LOGD(LOG_TAG, ">> Advertising start: customAdvData: %d, customScanResponseData: %d",
                 m_customAdvData, m_customScanResponseData);
 
@@ -620,15 +633,27 @@ bool NimBLEAdvertising::start(uint32_t duration, void (*advCompleteCB)(NimBLEAdv
         m_advDataSet = true;
     }
 
+    ble_addr_t peerAddr;
+    if (dirAddr != nullptr) {
+        memcpy(&peerAddr.val, dirAddr->getNative(), 6);
+        peerAddr.type = dirAddr->getType();
+    }
+
 #if defined(CONFIG_BT_NIMBLE_ROLE_PERIPHERAL)
-    rc = ble_gap_adv_start(NimBLEDevice::m_own_addr_type, NULL, duration,
+    rc = ble_gap_adv_start(NimBLEDevice::m_own_addr_type,
+                           (dirAddr != nullptr) ? &peerAddr : NULL,
+                           duration,
                            &m_advParams,
                            (pServer != nullptr) ? NimBLEServer::handleGapEvent :
                                                   NimBLEAdvertising::handleGapEvent,
                            (void*)this);
 #else
-    rc = ble_gap_adv_start(NimBLEDevice::m_own_addr_type, NULL, duration,
-                           &m_advParams, NimBLEAdvertising::handleGapEvent, this);
+    rc = ble_gap_adv_start(NimBLEDevice::m_own_addr_type,
+                           (dirAddr != nullptr) ? &peerAddr : NULL,
+                           duration,
+                           &m_advParams,
+                           NimBLEAdvertising::handleGapEvent,
+                           (void*)this);
 #endif
     switch(rc) {
         case 0:
@@ -812,6 +837,18 @@ void NimBLEAdvertisementData::setManufacturerData(const std::string &data) {
     cdata[0] = data.length() + 1;
     cdata[1] = BLE_HS_ADV_TYPE_MFG_DATA ;  // 0xff
     addData(std::string(cdata, 2) + data);
+} // setManufacturerData
+
+
+/**
+ * @brief Set manufacturer specific data.
+ * @param [in] data The manufacturer data to advertise.
+ */
+void NimBLEAdvertisementData::setManufacturerData(const std::vector<uint8_t> &data) {
+    char cdata[2];
+    cdata[0] = data.size() + 1;
+    cdata[1] = BLE_HS_ADV_TYPE_MFG_DATA ;  // 0xff
+    addData(std::string(cdata, 2) + std::string((char*)&data[0], data.size()));
 } // setManufacturerData
 
 

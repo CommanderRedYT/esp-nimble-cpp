@@ -45,12 +45,15 @@ public:
 
     NimBLEAddress   getAddress();
     uint8_t         getAdvType();
+    uint8_t         getAdvFlags();
     uint16_t        getAppearance();
     uint16_t        getAdvInterval();
     uint16_t        getMinInterval();
     uint16_t        getMaxInterval();
-    std::string     getManufacturerData();
+    uint8_t         getManufacturerDataCount();
+    std::string     getManufacturerData(uint8_t index = 0);
     std::string     getURI();
+    std::string     getPayloadByType(uint16_t type);
 
     /**
      * @brief A template to convert the service data to <type\>.
@@ -132,6 +135,7 @@ public:
     bool            haveAdvInterval();
     bool            haveTargetAddress();
     bool            haveURI();
+    bool            haveType(uint16_t type);
     std::string     toString();
     bool            isConnectable();
     bool            isLegacyAdvertisement();
@@ -162,7 +166,7 @@ private:
     uint8_t         m_advType;
     int             m_rssi;
     time_t          m_timestamp;
-    bool            m_callbackSent;
+    uint8_t         m_callbackSent;
     uint8_t         m_advLength;
 #if CONFIG_BT_NIMBLE_EXT_ADV
     bool            m_isLegacyAdv;

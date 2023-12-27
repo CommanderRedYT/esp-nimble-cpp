@@ -31,6 +31,7 @@
 /**************************/
 
 #include "NimBLEUUID.h"
+#include "NimBLEAddress.h"
 
 #include <vector>
 
@@ -58,6 +59,7 @@ public:
     void setCompleteServices32(const std::vector<NimBLEUUID> &v_uuid);
     void setFlags(uint8_t);
     void setManufacturerData(const std::string &data);
+    void setManufacturerData(const std::vector<uint8_t> &data);
     void setURI(const std::string &uri);
     void setName(const std::string &name);
     void setPartialServices(const NimBLEUUID &uuid);
@@ -90,11 +92,12 @@ public:
     void addServiceUUID(const NimBLEUUID &serviceUUID);
     void addServiceUUID(const char* serviceUUID);
     void removeServiceUUID(const NimBLEUUID &serviceUUID);
-    bool start(uint32_t duration = 0, void (*advCompleteCB)(NimBLEAdvertising *pAdv) = nullptr);
+    bool start(uint32_t duration = 0, void (*advCompleteCB)(NimBLEAdvertising *pAdv) = nullptr, NimBLEAddress* dirAddr = nullptr);
     bool stop();
     void setAppearance(uint16_t appearance);
     void setName(const std::string &name);
     void setManufacturerData(const std::string &data);
+    void setManufacturerData(const std::vector<uint8_t> &data);
     void setURI(const std::string &uri);
     void setServiceData(const NimBLEUUID &uuid, const std::string &data);
     void setAdvertisementType(uint8_t adv_type);

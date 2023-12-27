@@ -72,7 +72,6 @@ NimBLEService::~NimBLEService() {
 
 /**
  * @brief Dump details of this BLE GATT service.
- * @return N/A.
  */
 void NimBLEService::dump() {
     NIMBLE_LOGD(LOG_TAG, "Service: uuid:%s, handle: 0x%2x",
@@ -248,6 +247,9 @@ bool NimBLEService::start() {
  * @return The handle associated with this service.
  */
 uint16_t NimBLEService::getHandle() {
+    if (m_handle == NULL_HANDLE) {
+        ble_gatts_find_svc(&getUUID().getNative()->u, &m_handle);
+    }
     return m_handle;
 } // getHandle
 
